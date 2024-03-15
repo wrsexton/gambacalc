@@ -1,0 +1,13 @@
+version: '1'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - PYTHONUNBUFFERED=1
+      - LOGLEVEL=${LOGLEVEL}
+    command: ["python", "/home/src/main.py"]
+    volumes:
+      - .:/home
