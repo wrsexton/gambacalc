@@ -4,7 +4,7 @@ import logging
 from discord import Intents
 from discord.ext import commands
 
-from calc.calcs import calculate_chance_of_type_in_team_in_gen_3
+from calc.calcs import calculate_chance_of_type_in_team
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -27,10 +27,12 @@ async def cmd_ping(ctx):
 
 
 @bot.command(name="type")
-async def cmd_type_on_team(ctx, pokemon_type, team_size=6):
+async def cmd_type_on_team(ctx, pokemon_type, team_size=6, gen=3):
     logger.info(f"Calculating chance of {pokemon_type} on team of size {team_size}.")
-    chance = calculate_chance_of_type_in_team_in_gen_3(pokemon_type=pokemon_type, team_size=team_size)
-    await ctx.send(f"There is a {chance}% chance of a {pokemon_type} type on a team of {team_size}!")
+
+    chance = calculate_chance_of_type_in_team(pokemon_type=pokemon_type, team_size=team_size, gen=gen)
+
+    await ctx.send(f"There is a **{chance}%** chance of a **{pokemon_type} type** on a **team of {team_size}** in **Gen {gen}**!")
 
 
 @bot.event
